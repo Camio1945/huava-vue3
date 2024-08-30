@@ -1,0 +1,28 @@
+import config from '@/config'
+import request from '@/utils/request'
+
+// 登录
+export function login(params: Record<string, any>) {
+  return request.post(
+    {
+      url: '/sys/user/login',
+      params: { ...params, terminal: config.terminal }
+    },
+    { withToken: false }
+  )
+}
+
+// 退出登录
+export function logout() {
+  return request.post({ url: '/login/logout' })
+}
+
+// 用户信息
+export function getUserInfo() {
+  return request.get({ url: '/sys/user/mySelf' })
+}
+
+// 编辑管理员信息
+export function setUserInfo(params: any) {
+  return request.post({ url: '/auth.admin/editSelf', params })
+}
