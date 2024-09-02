@@ -23,7 +23,7 @@ const props = defineProps({
   }
 })
 let timer: any = null
-const second = ref(5)
+const second = ref(5000)
 const router = useRouter()
 props.showBtn &&
   (timer = setInterval(() => {

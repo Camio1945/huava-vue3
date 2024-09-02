@@ -2,7 +2,7 @@
   <div class="role-list">
     <el-card class="!border-none" shadow="never">
       <div>
-        <el-button v-perms="['auth.role/add']" type="primary" @click="handleAdd">
+        <el-button v-perms="['/sys/role/create']" type="primary" @click="handleAdd">
           <template #icon>
             <icon name="el-icon-Plus" />
           </template>
@@ -18,14 +18,26 @@
             <el-table-column prop="createTime" label="创建时间" min-width="180" />
             <el-table-column label="操作" width="200" fixed="right">
               <template #default="{ row }">
-                <el-button link type="primary" v-perms="['auth.role/edit']" @click="handleEdit(row)" v-if="row.id != 1">
+                <el-button
+                  link
+                  type="primary"
+                  v-perms="['/sys/role/update']"
+                  @click="handleEdit(row)"
+                  v-if="row.id != 1"
+                >
                   编辑
                 </el-button>
-                <el-button link type="primary" v-perms="['auth.role/edit']" @click="handleAuth(row)" v-if="row.id != 1">
+                <el-button
+                  link
+                  type="primary"
+                  v-perms="['/sys/role/update']"
+                  @click="handleAuth(row)"
+                  v-if="row.id != 1"
+                >
                   分配权限
                 </el-button>
                 <el-button
-                  v-perms="['auth.role/delete']"
+                  v-perms="['/sys/role/delete']"
                   link
                   type="danger"
                   @click="handleDelete(row.id)"
@@ -51,7 +63,7 @@
 import { rolePage, roleDelete } from '@/api/perms/role'
 import { usePaging } from '@/hooks/usePaging'
 import feedback from '@/utils/feedback'
-import EditPopup from './edit.vue'
+import EditPopup from './roleForm.vue'
 import AuthPopup from './auth.vue'
 
 const editRef = shallowRef<InstanceType<typeof EditPopup>>()

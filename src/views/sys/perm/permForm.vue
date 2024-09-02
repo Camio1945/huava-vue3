@@ -191,13 +191,12 @@ const menuOptions = ref<any[]>([])
 
 const getMenu = async () => {
   const data: any = await menuAll(true)
-  const menu: any = { id: 0, name: '顶级', children: data }
+  const menu: any = { id: '0', name: '顶级', children: data }
   menuOptions.value.push(menu)
 }
 
 const handleSubmit = async () => {
   await formRef.value?.validate()
-  formData.type = 'N'
   mode.value == 'edit' ? await menuEdit(formData) : await menuAdd(formData)
   popupRef.value?.close()
   emit('success')

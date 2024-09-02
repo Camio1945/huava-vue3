@@ -2,7 +2,7 @@
   <div class="menu-list">
     <el-card class="!border-none" shadow="never">
       <div>
-        <el-button v-perms="['auth.menu/add']" type="primary" @click="handleAdd()">
+        <el-button v-perms="['/sys/perm/create']" type="primary" @click="handleAdd()">
           <template #icon>
             <icon name="el-icon-Plus" />
           </template>
@@ -47,15 +47,15 @@
           <template #default="{ row }">
             <el-button
               v-if="row.type !== MenuEnum.ELEMENT"
-              v-perms="['auth.menu/add']"
+              v-perms="['/sys/perm/create']"
               type="primary"
               link
               @click="handleAdd(row.id)"
             >
               新增
             </el-button>
-            <el-button v-perms="['auth.menu/edit']" type="primary" link @click="handleEdit(row)"> 编辑</el-button>
-            <el-button v-perms="['auth.menu/delete']" type="danger" link @click="handleDelete(row.id)">
+            <el-button v-perms="['/sys/perm/update']" type="primary" link @click="handleEdit(row)"> 编辑</el-button>
+            <el-button v-perms="['/sys/perm/delete']" type="danger" link @click="handleDelete(row.id)">
               删除
             </el-button>
           </template>
@@ -70,7 +70,7 @@ import { menuDelete, menuAll } from '@/api/perms/menu'
 import type { ElTable } from 'element-plus'
 import { usePaging } from '@/hooks/usePaging'
 import { MenuEnum } from '@/enums/appEnums'
-import EditPopup from './edit.vue'
+import EditPopup from './permForm.vue'
 import feedback from '@/utils/feedback'
 
 const tableRef = shallowRef<InstanceType<typeof ElTable>>()

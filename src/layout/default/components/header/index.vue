@@ -1,6 +1,6 @@
 <template>
   <header class="header">
-    <div class="navbar">
+    <div class="navbar" v-if="false">
       <div class="flex-1 flex">
         <div class="navbar-item">
           <el-tooltip

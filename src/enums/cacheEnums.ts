@@ -2,7 +2,7 @@
 
 //token
 export const TOKEN_KEY = 'token'
-//token
+// refresh token
 export const REFRESH_TOKEN_KEY = 'refresh_token'
 //用户名
 export const USERNAME_KEY = 'username'

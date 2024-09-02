@@ -98,6 +98,8 @@ const themeClass = computed(() => `theme-${props.theme}`)
     &:not(.el-menu--collapse) {
       width: var(--aside-width);
     }
+
+    transition: width 0s ease;
   }
 }
 </style>

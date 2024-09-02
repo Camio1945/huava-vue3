@@ -3,16 +3,17 @@ import request from '@/utils/request'
 // 配置
 export function getConfig() {
   // return request.get({ url: '/config/getConfig' })
+  // TODO: 这里应该返回真实的配置信息
   return new Promise((resolve) => {
     resolve({
       oss_domain: 'https://php.likeadmin.cn/',
       web_name: '后台管理',
-      web_favicon: 'https://php.likeadmin.cn/resource/image/adminapi/default/web_favicon.ico',
-      web_logo: 'https://php.likeadmin.cn/resource/image/adminapi/default/web_logo.jpg',
-      login_image: 'https://php.likeadmin.cn/resource/image/adminapi/default/login_image.png',
+      web_favicon: '',
+      web_logo: '',
+      login_image: '/login_image.png',
       copyright_config: [
         {
-          key: '粤ICP备19081985号',
+          key: '京ICP备15033382号-6',
           value: 'https://beian.miit.gov.cn'
         }
       ]

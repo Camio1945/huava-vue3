@@ -1,5 +1,6 @@
 import config from '@/config'
 import request from '@/utils/request'
+import { getRefreshToken } from '@/utils/auth'
 
 // 登录
 export function login(params: Record<string, any>) {
@@ -14,7 +15,11 @@ export function login(params: Record<string, any>) {
 
 // 退出登录
 export function logout() {
-  return request.post({ url: '/login/logout' })
+  return request.post({
+    url: '/sys/user/logout',
+    data: getRefreshToken(),
+    headers: { 'Content-Type': 'text/plain' }
+  })
 }
 
 // 用户信息

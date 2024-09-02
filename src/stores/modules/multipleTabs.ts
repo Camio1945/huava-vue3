@@ -104,7 +104,6 @@ const useTabsStore = defineStore({
       }
       this.tasMap[fullPath] = tabItem
       if (meta?.keepAlive) {
-        console.log(componentName)
         this.addCache(componentName)
       }
       if (hasTabIndex != -1) {

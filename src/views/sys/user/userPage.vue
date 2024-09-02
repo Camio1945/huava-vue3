@@ -37,7 +37,7 @@
       </el-form>
     </el-card>
     <el-card v-loading="pager.loading" class="mt-4 !border-none" shadow="never">
-      <el-button v-perms="['auth.admin/add']" type="primary" @click="handleAdd">
+      <el-button v-perms="['/sys/user/create']" type="primary" @click="handleAdd">
         <template #icon>
           <icon name="el-icon-Plus" />
         </template>
@@ -60,12 +60,12 @@
           </el-table-column>
           <el-table-column label="操作" width="120" fixed="right">
             <template #default="{ row }">
-              <el-button v-perms="['auth.admin/edit']" type="primary" link @click="handleEdit(row)" v-if="row.id != 1">
+              <el-button v-perms="['/sys/user/update']" type="primary" link @click="handleEdit(row)" v-if="row.id != 1">
                 编辑
               </el-button>
               <el-button
                 v-if="row.id != 1"
-                v-perms="['auth.admin/delete']"
+                v-perms="['/sys/user/delete']"
                 type="danger"
                 link
                 @click="handleDelete(row.id)"
@@ -89,7 +89,7 @@ import { adminPage, adminDelete } from '@/api/perms/user'
 import { rolePage } from '@/api/perms/role'
 import { usePaging } from '@/hooks/usePaging'
 import feedback from '@/utils/feedback'
-import EditPopup from './edit.vue'
+import EditPopup from './userForm.vue'
 
 const editRef = shallowRef<InstanceType<typeof EditPopup>>()
 // 表单数据

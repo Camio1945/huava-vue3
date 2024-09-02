@@ -45,13 +45,13 @@
           <el-input-number v-model="sideWidth" :min="180" :max="250" />
         </div>
       </div>
-      <div class="setting-item mb-5 flex justify-between items-center">
+      <div class="setting-item mb-5 flex justify-between items-center" v-if="false">
         <div class="text-tx-secondary flex-none mr-3">显示LOGO</div>
         <div>
           <el-switch v-model="showLogo" :active-value="true" :inactive-value="false" />
         </div>
       </div>
-      <div class="setting-item mb-5 flex justify-between items-center">
+      <div class="setting-item mb-5 flex justify-between items-center" v-if="false">
         <div class="text-tx-secondary flex-none mr-3">显示面包屑</div>
         <div>
           <el-switch v-model="showCrumb" :active-value="true" :inactive-value="false" />

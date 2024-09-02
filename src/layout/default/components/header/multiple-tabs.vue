@@ -18,12 +18,16 @@
       </span>
       <template #dropdown>
         <el-dropdown-menu>
-          <el-dropdown-item command="closeCurrent"> 关闭当前</el-dropdown-item>
-          <el-dropdown-item command="closeOther"> 关闭其他</el-dropdown-item>
-          <el-dropdown-item command="closeAll"> 关闭全部</el-dropdown-item>
+          <el-dropdown-item command="closeCurrent">关闭当前</el-dropdown-item>
+          <el-dropdown-item command="closeOther">关闭其他</el-dropdown-item>
+          <el-dropdown-item command="closeAll">关闭全部</el-dropdown-item>
+          <el-dropdown-item command="toggleFullscreen">{{ isFullscreen ? '取消全屏' : '全屏显示' }}</el-dropdown-item>
+          <el-dropdown-item command="settings">主题设置</el-dropdown-item>
+          <el-dropdown-item command="logout">退出登录</el-dropdown-item>
         </el-dropdown-menu>
       </template>
     </el-dropdown>
+    <LayoutSetting />
   </div>
 </template>
 
@@ -31,6 +35,15 @@
 import useMultipleTabs from '@/hooks/useMultipleTabs'
 import { useWatchRoute } from '@/hooks/useWatchRoute'
 import useTabsStore, { getRouteParams } from '@/stores/modules/multipleTabs'
+import { useFullscreen } from '@vueuse/core'
+const { toggle: toggleFullscreen, isFullscreen } = useFullscreen()
+import useUserStore from '@/stores/modules/user'
+import feedback from '@/utils/feedback'
+const userStore = useUserStore()
+import useSettingStore from '@/stores/modules/setting'
+import LayoutSetting from '../setting/drawer.vue'
+
+const settingStore = useSettingStore()
 
 const router = useRouter()
 const tabsStore = useTabsStore()
@@ -44,7 +57,7 @@ const handleChange = (fullPath: any) => {
   router.push(getRouteParams(tabItem))
 }
 
-const handleCommand = (command: any) => {
+const handleCommand = async (command: any) => {
   switch (command) {
     case 'closeCurrent':
       removeTab()
@@ -55,7 +68,24 @@ const handleCommand = (command: any) => {
     case 'closeAll':
       removeAllTab()
       break
+    case 'toggleFullscreen':
+      await toggleFullscreen()
+      break
+    case 'logout':
+      await feedback.confirm('确定退出登录吗？')
+      await userStore.logout()
+      break
+    case 'settings':
+      openSetting()
+      break
   }
+}
+
+const openSetting = () => {
+  settingStore.setSetting({
+    key: 'showDrawer',
+    value: true
+  })
 }
 </script>
 <style lang="scss" scoped>

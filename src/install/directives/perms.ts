@@ -11,6 +11,7 @@ export default {
     const { value } = binding
     const userStore = useUserStore()
     const permissions = userStore.perms
+    console.log('permissions', permissions)
     const all_permission = '*'
     if (Array.isArray(value)) {
       if (value.length > 0) {

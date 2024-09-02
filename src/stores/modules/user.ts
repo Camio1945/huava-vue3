@@ -65,8 +65,7 @@ const useUserStore = defineStore({
         getUserInfo()
           .then((data) => {
             this.userInfo = { username: data.username, avatar: data.avatar }
-            // this.perms = data.permissions
-            this.perms = ['*']
+            this.perms = data.uris
             this.routes = filterAsyncRoutes(data.menu)
             resolve(data)
           })
