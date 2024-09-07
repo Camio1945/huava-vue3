@@ -48,11 +48,7 @@
           <el-table-column prop="username" label="用户名" align="center" />
           <el-table-column prop="realName" label="姓名" align="center" />
           <el-table-column prop="phoneNumber" label="手机号" align="center" />
-          <el-table-column prop="roleIds" label="角色" align="center">
-            <template #default="scope">
-              {{ getRoleNames(scope.row.roleIds) }}
-            </template>
-          </el-table-column>
+          <el-table-column prop="roleNames" label="角色" align="center" />
           <el-table-column prop="isEnabled" label="是否启用" align="center">
             <template #default="scope">
               {{ scope.row.isEnabled ? '启用' : '禁用' }}
@@ -104,10 +100,10 @@ const { pager, getPage, resetParams, resetPage } = usePaging({
   params: formData
 })
 
-let roles = []
+const roles = ref([])
 
 const getRoleNames = (roleIds: string[]) => {
-  return roleIds.map((id) => roles.find((item) => item.id === id).name).join(',')
+  return roleIds.map((id) => roles.value.find((item) => item.id === id).name).join(',')
 }
 
 const handleAdd = async () => {
@@ -131,10 +127,10 @@ const handleDelete = async (id: number) => {
   getPage()
 }
 
-onMounted(() => {
-  getPage()
-  rolePage({ searchCount: false }).then((res) => {
-    roles = res.list
-  })
+onMounted(async () => {
+  const { list } = await rolePage({ size: 500, searchCount: false })
+  roles.value = list
+  await getPage()
+  pager.list.forEach((item) => (item.roleNames = getRoleNames(item.roleIds)))
 })
 </script>
