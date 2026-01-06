@@ -24,7 +24,7 @@ export function logout() {
 
 // 用户信息
 export function getUserInfo() {
-  return request.get({ url: '/sys/user/mySelf' })
+  return request.get({ url: '/sys/user/myself' })
 }
 
 // 编辑管理员信息
