@@ -31,6 +31,6 @@ export function adminDetail(params: any) {
 }
 
 /** 用户名是否已经存在 */
-export function isUsernameExists(id: string, username: string) {
-  return request.get({ url: '/sys/user/isUsernameExists', params: { id, username } })
+export function isUsernameExists(neId: string, username: string) {
+  return request.get({ url: '/sys/user/isUsernameExists', params: { neId, username } })
 }
