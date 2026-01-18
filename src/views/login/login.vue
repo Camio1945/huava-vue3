@@ -39,7 +39,12 @@
                 style="width: calc(100% - 100px)"
               >
               </el-input>
-              <img :src="staticConfig.baseUrl + 'captcha'" style="width: 100px; height: 40px" alt="" />
+              <img
+                :src="captchaUrl"
+                style="width: 100px; height: 40px; cursor: pointer"
+                @click="refreshCaptcha"
+                alt="点击刷新验证码"
+              />
             </el-form-item>
           </el-form>
           <div class="mb-5">
@@ -79,6 +84,8 @@ const formData = reactive({
   captchaCode: '0000',
   isCaptchaDisabledForTesting: true
 })
+
+const captchaUrl = ref(staticConfig.baseUrl + 'captcha')
 const rules = {
   username: [
     {
@@ -125,6 +132,12 @@ const handleLogin = async () => {
   router.push(path)
 }
 const { isLock, lockFn: lockLogin } = useLockFn(handleLogin)
+
+// 刷新验证码
+const refreshCaptcha = () => {
+  // 添加时间戳参数防止浏览器缓存
+  captchaUrl.value = `${staticConfig.baseUrl}captcha?t=${Date.now()}`
+}
 
 onMounted(() => {
   const value = cache.get(USERNAME_KEY)

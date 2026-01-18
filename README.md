@@ -5,6 +5,14 @@
 The fronted of [huava](https://github.com/Camio1945/huava). Based on [LikeAdmin](https://github.com/likeshop-github/likeadmin_php/tree/master/admin).
 
 ---
+# Install And Run
+```shell
+npm install -g pnpm
+pnpm install
+pnpm run dev
+```
+
+---
 
 # Develop note
 
